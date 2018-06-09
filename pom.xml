@@ -36,6 +36,8 @@
     <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
     <version.awaitility>3.1.0</version.awaitility>
+    <version.httpclient>4.5.3</version.httpclient>
+    <version.httpclient.test>4.3.5</version.httpclient.test>
   </properties>
 
   <dependencyManagement>
@@ -59,6 +61,12 @@
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>monitor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${version.httpclient}</version>
     </dependency>
 
     <dependency>
