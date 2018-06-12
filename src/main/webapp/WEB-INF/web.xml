@@ -16,6 +16,6 @@
         </servlet>
         <servlet-mapping>
             <servlet-name>githubproxy</servlet-name>
-            <url-pattern>/proxy/hub/*</url-pattern>
+            <url-pattern>/scm/*</url-pattern>
         </servlet-mapping>
 </web-app>
