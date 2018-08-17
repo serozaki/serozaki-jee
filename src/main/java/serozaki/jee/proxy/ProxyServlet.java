@@ -35,6 +35,8 @@ import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.apache.http.message.BasicHttpRequest;
 import org.apache.http.message.HeaderGroup;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -102,6 +104,7 @@ public class ProxyServlet extends HttpServlet {
           ProxyServlet.class.getSimpleName() + ".targetHost";
 
   /* MISC */
+  private static Logger logger = LoggerFactory.getLogger(ProxyServlet.class);
 
   protected boolean doLog = false;
   protected boolean doForwardIP = true;
@@ -599,6 +602,8 @@ public class ProxyServlet extends HttpServlet {
   protected String rewriteUrlFromResponse(HttpServletRequest servletRequest, String theUrl) {
     //TODO document example paths
     final String targetUri = getTargetUri(servletRequest);
+    logger.info("targetUri {}", targetUri);
+    logger.info("theUrl {}", theUrl);
     if (theUrl.startsWith(targetUri)) {
       /*-
        * The URL points back to the back-end server.
