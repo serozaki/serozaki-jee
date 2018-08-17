@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>serozaki.jee</groupId>
-  <artifactId>serozaki-jee</artifactId>
-
-  <name>jee Example</name>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-
   <parent>
     <groupId>io.openshift</groupId>
     <artifactId>booster-parent</artifactId>
-    <version>20</version>
+    <version>23</version>
   </parent>
+
+  <groupId>serozaki.jee</groupId>
+  <artifactId>serozaki-jee</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>jee Example - Thorntail Booster - REST API Level 0 Mission</name>
 
   <properties>
     <version.thorntail>2.0.0.Final</version.thorntail>
@@ -32,8 +32,14 @@
         <groupId>io.thorntail</groupId>
         <artifactId>bom-all</artifactId>
         <version>${version.thorntail}</version>
-        <scope>import</scope>
         <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- workaround for https://issues.jboss.org/browse/THORN-2015 for running Arquillian tests -->
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>config-api-runtime</artifactId>
+        <version>1.3.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -43,19 +49,22 @@
       <groupId>io.thorntail</groupId>
       <artifactId>full</artifactId>
     </dependency>
+
     <dependency>
       <groupId>io.thorntail</groupId>
-      <artifactId>logging</artifactId>
+      <artifactId>microprofile-health</artifactId>
+      <!-- workaround for https://issues.jboss.org/browse/THORN-2015 -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>config-api-runtime</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.25</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.9.6</version>
     </dependency>
 
     <dependency>
@@ -142,7 +151,7 @@
             <configuration>
               <generator>
                 <includes>
-                  <include>wildfly-swarm</include>
+                  <include>thorntail-v2</include>
                 </includes>
                 <excludes>
                   <exclude>webapp</exclude>
@@ -150,9 +159,9 @@
               </generator>
               <enricher>
                 <config>
-                  <wildfly-swarm-health-check>
+                  <thorntail-v2-health-check>
                     <path>/</path>
-                  </wildfly-swarm-health-check>
+                  </thorntail-v2-health-check>
                 </config>
               </enricher>
             </configuration>

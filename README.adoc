@@ -1,4 +1,4 @@
-= REST API Level 0 - WildFly Swarm Booster
+= REST API Level 0 - Thorntail Booster
 
 IMPORTANT: This booster requires Java 8 JDK or greater and Maven 3.3.x.
 
@@ -14,7 +14,7 @@ $ git clone git@github.com:serozaki/serozaki-jee
 
 $ cd serozaki-jee
 
-$ mvn wildfly-swarm:run
+$ mvn thorntail:run
 ----
 
 == Interacting with the Booster Locally
@@ -57,6 +57,6 @@ $ mvn clean fabric8:deploy -Popenshift
 ----
 
 == More Information
-You can learn more about this booster and rest of the WildFly Swarm runtime in the link:http://launcher.fabric8.io/docs/wf-swarm-runtime.html[WildFly Swarm Runtime Guide].
+You can learn more about this booster and rest of the Thorntail runtime in the link:http://launcher.fabric8.io/docs/wf-swarm-runtime.html[Thorntail Runtime Guide].
 
 NOTE: Run the set of integration tests included with this booster using `mvn clean verify -Popenshift,openshift-it`.
